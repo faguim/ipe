@@ -1,0 +1,115 @@
+<div style="text-align:center" [innerHtml]="iframe_html"></div>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
+  <div class="form-group">
+    <div class="col-md-6">
+      <label for="nome" class="control-label">Nome</label>
+      <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome" [(ngModel)]="usuario.nome">
+    </div>
+
+    <div class="col-md-6">
+      <label for="email" class="control-label">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="nome@email.com" name="email" [(ngModel)]="usuario.email">
+    </div>
+  </div>
+  <label for="nota" class="control-label"></label>
+
+  <div class="form-group">
+
+    <div class="col-md-6">
+      <h4>
+        <strong>Qual nota você daria para a composição da aula?</strong>
+        <br>
+        <small> (1 - Muito ruim, 2 ruim, 3 bom, 4 muito bom)</small>
+      </h4>
+
+      <label for="videos" class="control-label">Vídeos</label>
+      <rating id="videos" name="nota" [(ngModel)]="videos" [max]=4></rating>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-6">
+      <label for="narracao" class="control-label">Narração</label>
+      <rating id="narracao" name="narracao" [(ngModel)]="narracao" [max]=4></rating>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-6">
+      <label for="animacoes" class="control-label">Animações</label>
+      <rating id="animacoes" name="animacoes" [(ngModel)]="animacoes" [max]=4></rating>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-6">
+      <label for="layout" class="control-label">Layout</label>
+      <rating id="layout" name="layout" [(ngModel)]="layout" [max]=4></rating>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="form-group">
+    <div class="col-md-6">
+      <h4>
+        <strong>Na tua opnião, alguma parte da aula é desnecessária?</strong>
+      </h4>
+
+      <label for="nota" class="control-label"></label>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="">Pra que servem as bombas</label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="">Contexto Histórico</label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="">Onde vamos usar</label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="">Outras</label>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="form-group">
+    <div class="col-md-6">
+      <label for="nota" class="control-label"></label>
+      <h4>
+        <strong>Gostou dos vídeos antes da aula?</strong>
+      </h4>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox1" value="option1"> Sim
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox2" value="option2"> Não
+      </label>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="form-group">
+    <div class="col-md-6">
+      <label for="nota" class="control-label"></label>
+      <h4>
+        <strong>Gostaria de mais aulas assim?</strong>
+      </h4>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox1" value="option1"> Sim
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox2" value="option2"> Não
+      </label>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
