@@ -1,115 +1,98 @@
 <div style="text-align:center" [innerHtml]="iframe_html"></div>
-
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
-  <div class="form-group">
-    <div class="col-md-6">
-      <label for="nome" class="control-label">Nome</label>
-      <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome" [(ngModel)]="usuario.nome">
-    </div>
-
-    <div class="col-md-6">
-      <label for="email" class="control-label">Email</label>
-      <input type="email" class="form-control" id="email" placeholder="nome@email.com" name="email" [(ngModel)]="usuario.email">
-    </div>
-  </div>
-  <label for="nota" class="control-label"></label>
-
-  <div class="form-group">
-
-    <div class="col-md-6">
-      <h4>
-        <strong>Qual nota você daria para a composição da aula?</strong>
-        <br>
-        <small> (1 - Muito ruim, 2 ruim, 3 bom, 4 muito bom)</small>
-      </h4>
-
-      <label for="videos" class="control-label">Vídeos</label>
-      <rating id="videos" name="nota" [(ngModel)]="videos" [max]=4></rating>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="col-md-6">
-      <label for="narracao" class="control-label">Narração</label>
-      <rating id="narracao" name="narracao" [(ngModel)]="narracao" [max]=4></rating>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="col-md-6">
-      <label for="animacoes" class="control-label">Animações</label>
-      <rating id="animacoes" name="animacoes" [(ngModel)]="animacoes" [max]=4></rating>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="col-md-6">
-      <label for="layout" class="control-label">Layout</label>
-      <rating id="layout" name="layout" [(ngModel)]="layout" [max]=4></rating>
-    </div>
-  </div>
-
-  <hr/>
-
-  <div class="form-group">
-    <div class="col-md-6">
-      <h4>
-        <strong>Na tua opnião, alguma parte da aula é desnecessária?</strong>
-      </h4>
-
-      <label for="nota" class="control-label"></label>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" value="">Pra que servem as bombas</label>
-      </div>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" value="">Contexto Histórico</label>
-      </div>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" value="">Onde vamos usar</label>
-      </div>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" value="">Outras</label>
+<div class="well" 
+  [hidden]="formHidden">
+     <h1 class="text-center">Questionário</h1>
+  <form [formGroup]="questionnareForm" class="form-horizontal">
+    <div class="form-group">
+      <label for="nome" class="col-sm-2 control-label">Nome</label>
+      <div class="col-sm-8">
+        <input formControlName="name" type="text" class="form-control" id="nome" name="nome">
       </div>
     </div>
-  </div>
 
-  <hr/>
+    <div class="form-group">
+      <div class="col-md-6">
+        <h4>
+          <strong>1) Qual nota você daria para a composição da aula?</strong>
+          <br>
+          <small> (1 - Muito ruim, 2 ruim, 3 bom, 4 muito bom)</small>
+        </h4>
 
-  <div class="form-group">
-    <div class="col-md-6">
-      <label for="nota" class="control-label"></label>
-      <h4>
-        <strong>Gostou dos vídeos antes da aula?</strong>
-      </h4>
-      <label class="checkbox-inline">
-        <input type="checkbox" id="inlineCheckbox1" value="option1"> Sim
-      </label>
-      <label class="checkbox-inline">
-        <input type="checkbox" id="inlineCheckbox2" value="option2"> Não
-      </label>
+        <label for="videos" class="control-label">Vídeos</label>
+        <rating formControlName="video" id="video" name="video" [max]=4></rating>
+        <br/>
+
+        <label for="narrative" class="control-label">Narração</label>
+        <rating formControlName="narrative" id="narrative" name="narrative" [max]=4></rating>
+        <br/>
+
+        <label for="animation" class="control-label">Animações</label>
+        <rating formControlName="animation" id="animation" name="animation" [max]=4></rating>
+        <br/>
+
+        <label for="layout" class="control-label">Layout</label>
+        <rating formControlName="layout" id="layout" name="layout" [max]=4></rating>
+      </div>
     </div>
-  </div>
 
-  <hr/>
+    <hr/>
 
-  <div class="form-group">
-    <div class="col-md-6">
-      <label for="nota" class="control-label"></label>
-      <h4>
-        <strong>Gostaria de mais aulas assim?</strong>
-      </h4>
-      <label class="checkbox-inline">
-        <input type="checkbox" id="inlineCheckbox1" value="option1"> Sim
-      </label>
-      <label class="checkbox-inline">
-        <input type="checkbox" id="inlineCheckbox2" value="option2"> Não
-      </label>
+    <div class="form-group">
+      <div class="col-md-6">
+        <h4>
+          <strong>2) Em sua opinião, alguma parte da aula é desnecessária?</strong>
+          <br>
+          <small> Você pode selecionar mais de uma opção</small>
+        </h4>
+
+        <label for="nota" class="control-label"></label>
+        <div formArrayName="question2">
+          <div *ngFor="let item of question2.controls; let i=index" [formGroupName]="i">
+            <div *ngFor="let key of item.controls | mapToKeys">
+              <input type="checkbox" formControlName="{{key.key}}">{{key.key}}
+            </div>
+          </div>
+        </div>
+        <input formControlName="question2Others" type="text" class="form-control" id="question2Others" name="question2Others">
+
+      </div>
     </div>
-  </div>
 
-  <button type="submit" class="btn btn-primary">Enviar</button>
-</form>
+    <hr/>
+
+    <div class="form-group">
+      <div class="col-md-6">
+        <h4>
+          <strong>3) Gostou do vídeo antes da aula? Por quê?</strong>
+        </h4>
+
+        <label for="question3" class="control-labele"></label>
+        <textarea formControlName="question3" type="text" class="form-control" id="question3" name="question3" [maxlength]="280"
+          rows="2"></textarea>
+
+      </div>
+    </div>
+
+    <hr/>
+
+    <div class="form-group">
+      <div class="col-md-6">
+        <label for="nota" class="control-label"></label>
+        <h4>
+          <strong>4) Gostaria de mais aulas assim?</strong>
+        </h4>
+        <label class="checkbox-inline">
+          <input formControlName="question4" type="radio" id="question4" value=true> Sim
+        </label>
+        <label class="checkbox-inline">
+          <input formControlName="question4" type="radio" id="question4" value=false> Não
+        </label>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="onSubmit();">Enviar</button>
+  </form>
+</div>
+
+  <h3 [hidden]="successMessageHidden" class="bg-primary" >Questionário enviado com sucesso! <br/>Muito obrigado pela colaboração.</h3>
+  <h3 [hidden]="failMessageHidden" class="bg-danger">Erro no envio. Por favor contacte o professor. <br/>Muito obrigado pela colaboração.</h3>
